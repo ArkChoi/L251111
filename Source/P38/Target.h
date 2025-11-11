@@ -29,10 +29,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	TObjectPtr <class UStaticMeshComponent> Sphere;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Data")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Data")
 	TObjectPtr <class UParticleSystem> P_Explosion;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Data")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Data")
 	TObjectPtr <class USoundBase> Cue_Explosion;
 
 	UFUNCTION()

@@ -42,7 +42,7 @@ void ATarget::Tick(float DeltaTime)
 
 void ATarget::ProcessActorAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), P_Explosion, GetActorLocation());
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), P_Explosion,GetActorLocation());
 	UGameplayStatics::SpawnSoundAtLocation(GetWorld(), Cue_Explosion, GetActorLocation());
 
 	DoDesigner2();

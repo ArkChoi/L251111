@@ -48,16 +48,16 @@ void ARocket::Tick(float DeltaTime)
 
 void ARocket::ProcessActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	UGameplayStatics::ApplyDamage(
-		OtherActor,
-		10.0f,
-		UGameplayStatics::GetPlayerController(GetWorld(), 0),
-		this,
-		UDamageType::StaticClass()
-	);
-
 	if (OtherActor->ActorHasTag(TEXT("Target")))
 	{
+		UGameplayStatics::ApplyDamage(
+			OtherActor,
+			10.0f,
+			UGameplayStatics::GetPlayerController(GetWorld(), 0),
+			this,
+			UDamageType::StaticClass()
+		);
+
 		Destroy();
 	}
 }
