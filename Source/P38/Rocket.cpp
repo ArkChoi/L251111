@@ -53,10 +53,10 @@ void ARocket::ProcessActorBeginOverlap(AActor* OverlappedActor, AActor* OtherAct
 		10.0f,
 		UGameplayStatics::GetPlayerController(GetWorld(), 0),
 		this,
-		nullptr
+		UDamageType::StaticClass()
 	);
 
-	if (ATarget* Target = Cast<ATarget>(OtherActor))
+	if (OtherActor->ActorHasTag(TEXT("Target")))
 	{
 		Destroy();
 	}

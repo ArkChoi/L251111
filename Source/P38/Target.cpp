@@ -5,6 +5,8 @@
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 ATarget::ATarget()
 {
@@ -14,18 +16,20 @@ ATarget::ATarget()
 	//
 	Box = CreateDefaultSubobject<UBoxComponent>(TEXT("Box"));
 	RootComponent = Box;
-	Box->SetBoxExtent(FVector(32.f, 32.f, 32.f));
+	Box->SetBoxExtent(FVector(50.f, 160.f, 160.f));
 
 	Sphere = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Sphere"));
 	Sphere->SetupAttachment(Box);
 	Sphere->SetRelativeScale3D(FVector(0.25f, 1.f, 1.f));
 
+	Tags.Add("Target");
 }
 
 // Called when the game starts or when spawned
 void ATarget::BeginPlay()
 {
 	Super::BeginPlay();
+	OnTakeAnyDamage.AddDynamic(this, &ATarget::ProcessActorAnyDamage);
 	
 }
 
@@ -36,3 +40,16 @@ void ATarget::Tick(float DeltaTime)
 
 }
 
+void ATarget::ProcessActorAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), P_Explosion, GetActorLocation());
+	UGameplayStatics::SpawnSoundAtLocation(GetWorld(), Cue_Explosion, GetActorLocation());
+
+	DoDesigner2();
+	Destroy();
+}
+
+void ATarget::DoDesigner2_Implementation(void)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Cpp Code"));
+}

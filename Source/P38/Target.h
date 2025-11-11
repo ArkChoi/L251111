@@ -10,8 +10,8 @@ UCLASS()
 class P38_API ATarget : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ATarget();
 
@@ -19,13 +19,29 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
 	TObjectPtr <class UBoxComponent> Box;
+
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	TObjectPtr <class UStaticMeshComponent> Sphere;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Data")
+	TObjectPtr <class UParticleSystem> P_Explosion;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Data")
+	TObjectPtr <class USoundBase> Cue_Explosion;
+
+	UFUNCTION()
+	void ProcessActorAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void DoDesigner();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void DoDesigner2();
+	void DoDesigner2_Implementation(void);
 };
