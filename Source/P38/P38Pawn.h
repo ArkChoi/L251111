@@ -30,7 +30,8 @@ public:
 
 	void RoketFire();
 
-	void EnhancedFire(const FInputActionValue& Value);
+	UFUNCTION(BlueprintCallable, Category = "Control")
+	void EnhancedFire();
 
 public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
@@ -62,4 +63,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<class UInputAction> IA_Fire;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VALUE")
+	TSubclassOf<class ARocket> RocketTemplate;
 };

@@ -55,6 +55,12 @@ AP38Pawn::AP38Pawn()
 	{
 		IA_Fire = IA_FireAsset.Object;
 	}
+
+	static ConstructorHelpers::FClassFinder<ARocket> BP_RocketTemplate(TEXT("/Script/Engine.Blueprint'/Game/Blueprints/BP_Rocket.BP_Rocket_C'"));
+	if (BP_RocketTemplate.Succeeded())
+	{
+		RocketTemplate = BP_RocketTemplate.Class;
+	}
 }
 
 // Called when the game starts or when spawned
@@ -80,11 +86,11 @@ void AP38Pawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	UEnhancedInputComponent* UIC = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+	/*UEnhancedInputComponent* UIC = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	if (UIC)
 	{
 		UIC->BindAction(IA_Fire, ETriggerEvent::Triggered, this, &AP38Pawn::EnhancedFire);
-	}
+	}*/
 }
 
 void AP38Pawn::RoketFire()
@@ -93,8 +99,12 @@ void AP38Pawn::RoketFire()
 }
 
 //
-void AP38Pawn::EnhancedFire(const FInputActionValue& Value)
+void AP38Pawn::EnhancedFire() //(const FInputActionValue& Value)
 {
-	AP38Pawn::RoketFire();
-	UE_LOG(LogTemp, Warning, TEXT("Fire"));
+	/*AP38Pawn::RoketFire();
+	UE_LOG(LogTemp, Warning, TEXT("Fire"));*/
+	if (RocketTemplate)
+	{
+		GetWorld()->SpawnActor<AActor>(RocketTemplate, Arrow->K2_GetComponentToWorld());
+	}
 }

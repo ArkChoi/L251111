@@ -33,6 +33,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
 	TObjectPtr <class UProjectileMovementComponent> ProjectileMovement;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "Overlap")
 	void ProcessActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
 };

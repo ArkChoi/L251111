@@ -9,4 +9,5 @@ AP38GameMode::AP38GameMode()
 {
 	DefaultPawnClass = AP38Pawn::StaticClass();
 	PlayerControllerClass = AP38PlayerController::StaticClass();
+
 }

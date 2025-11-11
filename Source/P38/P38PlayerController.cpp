@@ -21,11 +21,36 @@ void AP38PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(Player))
+	
+}
+
+void AP38PlayerController::OnPossess(APawn* aPawn)
+{
+	Super::OnPossess(aPawn);
+
+	if (IsLocalController()) 
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+		if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(Player))
 		{
-			InputSystem->AddMappingContext(InputMapping, 0);
+			if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+			{
+				InputSystem->AddMappingContext(InputMapping, 0);
+			}
 		}
 	}
+}
+
+void AP38PlayerController::OnUnPossess()
+{
+	if (IsLocalController())
+	{
+		if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(Player))
+		{
+			if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
+			{
+				InputSystem->RemoveMappingContext(InputMapping);
+			}
+		}
+	}
+	Super::OnUnPossess();
 }
