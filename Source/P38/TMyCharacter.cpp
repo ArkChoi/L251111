@@ -64,6 +64,8 @@ void ATMyCharacter::Move(float Forward, float Right)
 	const FVector RightVector = UKismetMathLibrary::GetRightVector(YawRollRotation);
 	AddMovementInput(RightVector, Right);
 
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+
 	//备屈 内靛
 	//AddMovementInput(FVector(Forward, Rigjt, 0));
 }
@@ -90,7 +92,7 @@ void ATMyCharacter::Run(float Forward, float Right)
 	AddMovementInput(RightVector, Right);
 	//备屈 内靛
 	//AddMovementInput(FVector(Forward, Rigjt, 0));
-	GetCharacterMovement()->
+	GetCharacterMovement()->MaxWalkSpeed = 1200.0f;
 }
 
 void ATMyCharacter::RunTrigger()
