@@ -20,5 +20,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
 	float GroundSpeed = 0.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
-	bool bIsRun = false;
+	uint8 bIsRun : 1 = false;
 };

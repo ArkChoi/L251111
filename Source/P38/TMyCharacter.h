@@ -36,7 +36,7 @@ public:
 	TObjectPtr<class UInputAction> IA_Move;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
-	bool bIsRun = false;
+	uint8 bIsRun : 1 = false; //이게 bool 과 같은 건데 네트워크 때문에 문제가 된다고 한다. C++에는 없으니깐..
 
 	UFUNCTION(BlueprintCallable)
 	void Move(float Forward, float Right);

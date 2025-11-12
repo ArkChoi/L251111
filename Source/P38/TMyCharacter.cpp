@@ -64,7 +64,7 @@ void ATMyCharacter::Move(float Forward, float Right)
 	const FVector RightVector = UKismetMathLibrary::GetRightVector(YawRollRotation);
 	AddMovementInput(RightVector, Right);
 
-	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
 
 	//구형 코드
 	//AddMovementInput(FVector(Forward, Rigjt, 0));
@@ -79,7 +79,6 @@ void ATMyCharacter::Look(float Pitch, float Yaw)
 
 void ATMyCharacter::Run(float Forward, float Right)
 {
-	//카메라 꺽는 방향으로 가는거
 	const FRotator CameraRotation = GetController()->GetControlRotation();
 	const FRotator YawRotation = FRotator(0, CameraRotation.Yaw, 0);
 	const FRotator YawRollRotation = FRotator(0, CameraRotation.Yaw, CameraRotation.Roll);
@@ -87,12 +86,10 @@ void ATMyCharacter::Run(float Forward, float Right)
 	const FVector ForwardVector = UKismetMathLibrary::GetForwardVector(YawRotation);
 	AddMovementInput(ForwardVector, Forward);
 
-	//Right 구현
 	const FVector RightVector = UKismetMathLibrary::GetRightVector(YawRollRotation);
 	AddMovementInput(RightVector, Right);
-	//구형 코드
-	//AddMovementInput(FVector(Forward, Rigjt, 0));
-	GetCharacterMovement()->MaxWalkSpeed = 1200.0f;
+
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
 }
 
 void ATMyCharacter::RunTrigger()
